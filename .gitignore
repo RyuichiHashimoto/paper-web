@@ -15,3 +15,4 @@ poetry.lock
 .ssh/known_hosts
 .vscode/
 .gitconfig
+__pycache__/

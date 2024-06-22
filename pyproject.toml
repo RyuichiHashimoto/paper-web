@@ -13,6 +13,7 @@ flask = "^3.0.3"
 sqlalchemy = "^2.0.31"
 peewee = "^3.17.5"
 pymysql = "^1.1.1"
+flask-peewee = "^3.0.6"
 
 
 [tool.poetry.group.dev.dependencies]

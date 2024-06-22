@@ -24,6 +24,11 @@ class Paper(BaseModel):
     last_modified = DateField()
 
 
+class Paper_WebMetaInfo(BaseModel):
+    paper_id = ForeignKeyField(Paper, backref="metainfo")
+    visible = BooleanField(default=True)
+
+
 class Category(BaseModel):
     category_id = CharField(primary_key=True, max_length=255)
     category = CharField()
@@ -37,18 +42,18 @@ class PaperCategory(BaseModel):
         primary_key = CompositeKey("paper_id", "category_id")
 
 
-class Auther(BaseModel):
-    auther_id = CharField(primary_key=True, max_length=255)
+class Author(BaseModel):
+    author_id = CharField(primary_key=True, max_length=255)
     name = CharField()
     affiliation = CharField(null=True)
 
 
-class PaperAuther(BaseModel):
-    paper_id = ForeignKeyField(Paper, backref="authers")
-    auther_id = ForeignKeyField(Auther, backref="papers")
+class PaperAuthor(BaseModel):
+    paper_id = ForeignKeyField(Paper, backref="authors")
+    author_id = ForeignKeyField(Author, backref="papers")
 
     class Meta:
-        primary_key = CompositeKey("paper_id", "auther_id")
+        primary_key = CompositeKey("paper_id", "author_id")
 
 
 class Chapter(BaseModel):
@@ -63,4 +68,4 @@ class Chapter(BaseModel):
 
 
 if __name__ == "__main__":
-    DB.create_tables([Paper, Category, PaperCategory, Auther, PaperAuther, Chapter])
+    DB.create_tables([Paper, Category, PaperCategory, Author, PaperAuthor, Chapter])

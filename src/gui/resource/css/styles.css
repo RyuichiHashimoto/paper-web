@@ -1,0 +1,108 @@
+body {
+    font-family: メイリオ, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+td.actions {
+    text-align: center;
+}
+
+.action-buttons img {
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    z-index: 10;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.button-panel {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.button-panel button {
+    margin-left: 10px;
+}
+
+.metadata p,
+.description p,
+.citations p,
+.related-articles p {
+    margin: 10px 0;
+}
+
+.citation-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.citation-chart .year {
+    font-size: 12px;
+    text-align: center;
+}
+
+.citation-chart .bar {
+    width: 20px;
+    background-color: #ccc;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header,
+.pane1,
+.pane2 {
+    background-color: #004b66;
+    color: white;
+    padding: 20px;
+    margin: 10px 0;
+}

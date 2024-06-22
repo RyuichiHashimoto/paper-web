@@ -1,11 +1,20 @@
-from db.model import Paper, Category, PaperCategory, Auther, PaperAuther, Chapter
+from db.model import Paper, Category, PaperCategory, Author, PaperAuthor, Chapter, Paper_WebMetaInfo
 from datetime import date
 
 if __name__ == "__main__":
     # DB.connect()
 
-    table_list = [PaperCategory, PaperAuther, Chapter, Paper, Auther, Category]
+    table_list = [
+        # Paper_WebMetaInfo,
+        PaperCategory,
+        PaperAuthor,
+        Chapter,
+        Paper,
+        Author,
+        Category,
+    ]
     for table in table_list:
+        print(table.__name__)
         table.drop_table()
 
     for table in table_list[::-1]:
@@ -36,43 +45,43 @@ if __name__ == "__main__":
         },
     ]
 
-    auther_list = [
+    author_list = [
         {
-            "auther_id": "A-00001",
+            "author_id": "A-00001",
             "name": "Ryuichi Hashimoto",
             "affiliation": "Osaka Prefecture University",
         },
         {
-            "auther_id": "A-00002",
+            "author_id": "A-00002",
             "name": "Hisao Ishibuchi",
             "affiliation": "Osaka Prefecture University",
         },
         {
-            "auther_id": "A-00003",
+            "author_id": "A-00003",
             "name": "Naoki Masuyama",
             "affiliation": "Osaka Prefecture University",
         },
         {
-            "auther_id": "A-00004",
+            "author_id": "A-00004",
             "name": "Yusuke Nojima",
             "affiliation": "Osaka Prefecture University",
         },
         {
-            "auther_id": "A-00005",
+            "author_id": "A-00005",
             "name": "Toshiki Urita",
             "affiliation": "Osaka Prefecture University",
         },
     ]
-    paper_auther_list = [
-        {"paper_id": "P-00001", "auther_id": "A-00001"},
-        {"paper_id": "P-00001", "auther_id": "A-00002"},
-        {"paper_id": "P-00001", "auther_id": "A-00003"},
-        {"paper_id": "P-00001", "auther_id": "A-00004"},
-        {"paper_id": "P-00002", "auther_id": "A-00001"},
-        {"paper_id": "P-00002", "auther_id": "A-00002"},
-        {"paper_id": "P-00002", "auther_id": "A-00003"},
-        {"paper_id": "P-00002", "auther_id": "A-00004"},
-        {"paper_id": "P-00002", "auther_id": "A-00005"},
+    paper_author_list = [
+        {"paper_id": "P-00001", "author_id": "A-00001"},
+        {"paper_id": "P-00001", "author_id": "A-00002"},
+        {"paper_id": "P-00001", "author_id": "A-00003"},
+        {"paper_id": "P-00001", "author_id": "A-00004"},
+        {"paper_id": "P-00002", "author_id": "A-00001"},
+        {"paper_id": "P-00002", "author_id": "A-00002"},
+        {"paper_id": "P-00002", "author_id": "A-00003"},
+        {"paper_id": "P-00002", "author_id": "A-00004"},
+        {"paper_id": "P-00002", "author_id": "A-00005"},
     ]
     category_list = [
         {"category_id": "C-00001", "category": "multi-tasking"},
@@ -87,7 +96,7 @@ if __name__ == "__main__":
     ]
 
     Paper.insert_many(paper_list).execute()
-    Auther.insert_many(auther_list).execute()
-    PaperAuther.insert_many(paper_auther_list).execute()
+    Author.insert_many(author_list).execute()
+    PaperAuthor.insert_many(paper_author_list).execute()
     Category.insert_many(category_list).execute()
     PaperCategory.insert_many(paper_category_list).execute()

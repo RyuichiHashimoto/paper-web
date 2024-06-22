@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DB Table</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/icon.css') }}">
+
+</head>
+
+<body>
+    <div class="myContainer">
+        <h1>Paper List</h1>
+        <div class="icon-button right_allin_button">
+            <a href="#" class="action-button" data-tooltip="Add New Paper" id="addButton">
+                <img src="{{ url_for('static', filename='image/add.png') }}" alt="Add" style="width:20px;height:20px;">
+            </a>
+            <a href="/refresh_new_paper" class="action-button delete-button" data-tooltip="Refresh Table">
+                <img src="{{ url_for('static', filename='image/refresh.png') }}" alt="Refresh" ,
+                    style="width:20px;height:20px;">
+            </a>
+
+            <a href="#" class="action-button delete-button" data-tooltip="delete this paper">
+                <img src=" {{ url_for('static', filename='image/delete.png' ) }}" alt="Edit"
+                    style="width:20px;height:20px;">
+            </a>
+
+
+        </div>
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>citations</th>
+
+            </tr>
+            {% for paper in papers %}
+            <tr>
+                <td><input type="checkbox" name="select_paper" value="{{ paper.paper_id }}"></td>
+                <td>
+                    <a href="/paper/{{ paper.paper_id }}" class="title-link">{{ paper.title }}</a>
+                </td>
+                <td>{{ paper.description }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div id="tooltip" class="tooltip"></div>
+
+
+
+
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/add_modal.js') }}"></script>
+    </div>
+</body>
+
+
+<!-- モーダルの構造 -->
+<!-- モーダルの構造 -->
+<!-- モーダルの構造 -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- モーダルのヘッダー -->
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Paper</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- モーダルのボディ -->
+            <div class="modal-body">
+                <form id="newPaperForm" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <label for="paperTitle" class="col-sm-3 col-form-label">Title:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="paperTitle" name="title" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="paperDescription" class="col-sm-3 col-form-label">Description:</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="paperDescription" name="description" rows="3"
+                                required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="paperCitations" class="col-sm-3 col-form-label">Citations:</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" id="paperCitations" name="citations" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="paperPDF" class="col-sm-3 col-form-label">Upload PDF:</label>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control-file" id="paperPDF" name="pdf"
+                                accept="application/pdf" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- モーダルのフッター -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">閉じる</button>
+                <button type="submit" class="btn btn-primary" form="newPaperForm">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- jQueryとBootstrapのJavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- モーダル表示用のJavaScript -->
+<script>
+    $(document).ready(function () {
+        $("#addButton").click(function () {
+            $("#myModal").modal();
+        });
+    });
+</script>
+
+</html>

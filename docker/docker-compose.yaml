@@ -17,6 +17,8 @@ services:
     env_file: 
       - "../env/env.env"
       - "../env/credential.env"
+    # ports:
+    #   - 5000:5000
 
 
     restart: always

@@ -14,6 +14,7 @@ entity paper {
   last_modified : DATE
 }
 
+
 entity category {
   * category_id : STR
     ---

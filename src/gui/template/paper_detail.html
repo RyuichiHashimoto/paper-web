@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Paper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/table_stype_paper_detail.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/icon.css') }}">
+    <!-- <link rel="stylesheet" href="../resource/css/table_stype_paper_detail.css"> -->
+</head>
+
+<body>
+    <div class="myContainer">
+        <div class="header">
+            <h1>Article</h1>
+        </div>
+        <div class="pane1">
+            <div class="icon-button right_allin_button">
+                <a href="#" class="action-button" data-tooltip="Add New Paper" id="addButton"
+                    onclick="openModal('/add_new_paper', 'Add New Paper')">
+                    <img src="{{ url_for('static', filename='image/edit.png') }}" style="width:20px;height:20px;">
+                </a>
+
+            </div>
+            <div class="metadata">
+                <table>
+                    <tr>
+                        <th>title</th>
+                        <td>{{ paper.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Authors</th>
+                        <td>
+                            {% for author in authors %}
+                            {{ author.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Publication date</th>
+                        <td>{{ paper.public_date }}</td>
+                    </tr>
+                    <tr>
+                        <th>source</th>
+                        <td>{{ paper.source_reference }}</td>
+                    </tr>
+                    <tr>
+                        <th>URL</th>
+                        <td><a href="{{ paper.url }}" target="_blank">{{ paper.url }}</a></td>
+                    </tr>
+
+                    <tr>
+                        <th>Description</th>
+                        <td>The performance of decomposition-based multiobjective evolutionary algorithms (MOEAs) often
+                            deteriorates clearly when solving multiobjective optimization problems with irregular Pareto
+                            fronts (PFs). The main reason is the improper settings of reference vectors and scalarizing
+                            functions. In this paper, we propose a decomposition-based MOEA guided by a growing neural
+                            gas network, which learns the topological structure of the PF. Both reference vectors and
+                            scalarizing functions are adapted based on the topological structure to enhance the
+                            evolutionary algorithm's search ability. The proposed algorithm is compared with eight
+                            state-of-the-art optimizers on 34 test problems. The experimental results demonstrate that
+                            the proposed method is competitive in handling irregular PFs.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="pane2">
+            <h1>Pane2（論文内容）</h1>
+        </div>
+    </div>
+</body>
+
+</html>
