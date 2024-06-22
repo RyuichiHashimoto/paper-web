@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "work"
+version = "0.1.0"
+description = ""
+authors = ["hashimoto <ryuichi.hashimoto.git@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+openai = "^1.35.3"
+streamlit = "^1.36.0"
+flask = "^3.0.3"
+sqlalchemy = "^2.0.31"
+peewee = "^3.17.5"
+pymysql = "^1.1.1"
+
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.10.0"
+black = "^24.4.2"
+ipykernel = "^6.29.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 150

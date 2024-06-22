@@ -1,0 +1,53 @@
+version: "3.9"
+services:
+  
+  paper-server:
+    build: 
+     context: .
+     dockerfile: Dockerfile
+
+    volumes:
+      - ../:/home/work
+
+    environment:
+      HOME: "/home/work/"
+
+
+
+    env_file: 
+      - "../env/env.env"
+      - "../env/credential.env"
+
+
+    restart: always
+    working_dir: /home/work
+    container_name: paper-server
+
+
+    command: sleep 400000
+
+  paper-db:
+    image: mysql:8.0.1
+    container_name: paper-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: paper-db
+      MYSQL_USER: hashimoto
+      MYSQL_PASSWORD: hashimoto
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+    - ../mysql_server/db/data:/var/lib/mysql
+    - ../mysql_server/db/my.cnf:/etc/mysql/conf.d/my.cnf
+    - ../mysql_server/db/sql:/docker-entrypoint-initdb.d
+      #    ports:
+      #    - 3306:3306
+
+    
+
+
+    
+
+
+
+
