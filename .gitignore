@@ -1,0 +1,17 @@
+.cache
+.dotnet
+.local/
+.vscode-server/
+.ipython/
+mysql_server/db/data/
+.dbclient/
+.viminfo
+.python_history
+.streamlit/
+env/credential.env
+.bash_history
+.mysql_history
+poetry.lock
+.ssh/known_hosts
+.vscode/
+.gitconfig
