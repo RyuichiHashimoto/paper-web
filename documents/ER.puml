@@ -1,0 +1,62 @@
+@startuml
+skinparam linetype ortho
+
+entity paper {
+  * paper_id : STR
+  ---
+  title : STR
+  abstract: STR
+  description: STR <<NULL>>
+  source_reference: STR <<NULL>>
+  url: STR <<NULL>>
+  public_date : DATE 
+  created_at : DATE 
+  last_modified : DATE
+}
+
+entity category {
+  * category_id : STR
+    ---
+    category: STR
+}
+
+
+entity paper_auther {
+  * paper_id : STR
+  * auther_id : STR
+    ' ---
+}
+
+entity paper_category {
+  * paper_id : STR
+  * category_id : STR
+    ' ---
+}
+
+entity auther {
+  * auther_id : STR
+  ---
+  name : STR
+  affiliation: STR <<NULL>>
+  version: STR
+}
+
+entity chapter {
+  * paper_id : STR
+  * chapter_id: STR
+  ---
+  title: STR
+  content: STR
+  summary: STR
+}
+
+paper ||--o{ chapter
+paper ||--o{ paper_auther
+auther ||--o{ paper_auther
+
+paper ||--o{ paper_category
+category ||--o{ paper_category
+
+' techniques || 
+
+@enduml
