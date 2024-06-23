@@ -23,3 +23,48 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
+document.getElementById('newPaperForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    var formData = new FormData(this);
+
+    fetch('/upload', {
+        method: 'POST',
+        body: formData
+    }).then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('File uploaded successfully');
+                $('#myModal').modal('hide');
+            } else {
+                // alert('File upload failed: ' + data.message);
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+            // alert('An error occurred during the file upload');
+        });
+});
+
+
+document.getElementById('editPaperForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    var formData = new FormData(this);
+
+    fetch('/update-paper-detail', {
+        method: 'POST',
+        body: formData
+    }).then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('File uploaded successfully');
+                $('#myModal').modal('hide');
+            } else {
+                // alert('File upload failed: ' + data.message);
+            }
+        }).catch(error => {
+            console.error('Error:', error);
+            // alert('An error occurred during the file upload');
+        });
+});

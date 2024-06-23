@@ -5,7 +5,7 @@ if __name__ == "__main__":
     # DB.connect()
 
     table_list = [
-        # Paper_WebMetaInfo,
+        Paper_WebMetaInfo,
         PaperCategory,
         PaperAuthor,
         Chapter,
@@ -94,9 +94,20 @@ if __name__ == "__main__":
         {"paper_id": "P-00002", "category_id": "C-00001"},
         {"paper_id": "P-00002", "category_id": "C-00003"},
     ]
+    paper_metadata_list = [
+        {
+            "paper_id": "P-00001",
+            "cloudfilepath": f"raw/cec664dd-e778-4cb3-92b6-0ac1ecafb9f5.pdf",
+        },
+        {
+            "paper_id": "P-00002",
+            "cloudfilepath": f"raw/0b50b30c-ec6a-41f8-b67f-3cba90330362.pdf",
+        },
+    ]
 
     Paper.insert_many(paper_list).execute()
     Author.insert_many(author_list).execute()
     PaperAuthor.insert_many(paper_author_list).execute()
     Category.insert_many(category_list).execute()
     PaperCategory.insert_many(paper_category_list).execute()
+    Paper_WebMetaInfo.insert_many(paper_metadata_list).execute()

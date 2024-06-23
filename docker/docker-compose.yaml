@@ -16,6 +16,7 @@ services:
 
     env_file: 
       - "../env/env.env"
+      - "../env/azurite.env"
       - "../env/credential.env"
     # ports:
     #   - 5000:5000
@@ -42,13 +43,25 @@ services:
     - ../mysql_server/db/data:/var/lib/mysql
     - ../mysql_server/db/my.cnf:/etc/mysql/conf.d/my.cnf
     - ../mysql_server/db/sql:/docker-entrypoint-initdb.d
-      #    ports:
-      #    - 3306:3306
+  
 
-    
+  paper-azurite:
+    build: 
+     context: .
+     dockerfile: Dockerfile_azurite
+    container_name: paper-azurite
+    ports:
+      - "10000:10000" # Blob service
+      - "10001:10001" # Queue service
+      - "10002:10002" # Table service
+    volumes:
+      - ../azurite:/data
+    command: "azurite --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0 -l /data"
 
-
-    
+  paper-azurite-cli:
+    image: mcr.microsoft.com/azure-storage/azurite-cli     
+    container_name: paper-azurite-cli    
+    command: sleep 1000000000    
 
 
 

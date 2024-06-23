@@ -14,6 +14,7 @@ sqlalchemy = "^2.0.31"
 peewee = "^3.17.5"
 pymysql = "^1.1.1"
 flask-peewee = "^3.0.6"
+azure-storage-blob = "^12.20.0"
 
 
 [tool.poetry.group.dev.dependencies]

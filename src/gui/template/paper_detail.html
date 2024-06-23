@@ -5,22 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research Paper</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='./css/table_stype_paper_detail.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='./css/common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/common.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='./css/icon.css') }}">
-    <!-- <link rel="stylesheet" href="../resource/css/table_stype_paper_detail.css"> -->
+    {% set author_names = authors | map(attribute='name') | join(', ') %}
 </head>
 
 <body>
+
+
     <div class="myContainer">
-        <div class="header">
-            <h1>Article</h1>
-        </div>
+        <h1>Article
+            <a href="/view/{{ paper.paper_id }}" class="action-button" target="_blank">
+                <img src=" {{ url_for('static', filename='image/download.png' ) }}" alt="Edit"
+                    style="width:20px;height:20px;">
+            </a>
+        </h1>
         <div class="pane1">
             <div class="icon-button right_allin_button">
-                <a href="#" class="action-button" data-tooltip="Add New Paper" id="addButton"
-                    onclick="openModal('/add_new_paper', 'Add New Paper')">
-                    <img src="{{ url_for('static', filename='image/edit.png') }}" style="width:20px;height:20px;">
+                <a href="#" class="action-button" data-tooltip="Edit Paper Detail" id="editButton">
+                    <img src="{{ url_for('static', filename='image/edit.png') }}" alt="edit"
+                        style="width:20px;height:20px;">
                 </a>
 
             </div>
@@ -32,20 +39,17 @@
                     </tr>
                     <tr>
                         <th>Authors</th>
-                        <td>
-                            {% for author in authors %}
-                            {{ author.name }}{% if not loop.last %}, {% endif %}
-                            {% endfor %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Publication date</th>
-                        <td>{{ paper.public_date }}</td>
+                        <td>{{author_names}}</td>
                     </tr>
                     <tr>
                         <th>source</th>
                         <td>{{ paper.source_reference }}</td>
                     </tr>
+                    <tr>
+                        <th>Publication date</th>
+                        <td>{{ paper.public_date }}</td>
+                    </tr>
+
                     <tr>
                         <th>URL</th>
                         <td><a href="{{ paper.url }}" target="_blank">{{ paper.url }}</a></td>
@@ -53,23 +57,145 @@
 
                     <tr>
                         <th>Description</th>
-                        <td>The performance of decomposition-based multiobjective evolutionary algorithms (MOEAs) often
-                            deteriorates clearly when solving multiobjective optimization problems with irregular Pareto
-                            fronts (PFs). The main reason is the improper settings of reference vectors and scalarizing
-                            functions. In this paper, we propose a decomposition-based MOEA guided by a growing neural
-                            gas network, which learns the topological structure of the PF. Both reference vectors and
+                        <td>The performance of decomposition-based multiobjective evolutionary algorithms (MOEAs)
+                            often
+                            deteriorates clearly when solving multiobjective optimization problems with irregular
+                            Pareto
+                            fronts (PFs). The main reason is the improper settings of reference vectors and
+                            scalarizing
+                            functions. In this paper, we propose a decomposition-based MOEA guided by a growing
+                            neural
+                            gas network, which learns the topological structure of the PF. Both reference vectors
+                            and
                             scalarizing functions are adapted based on the topological structure to enhance the
                             evolutionary algorithm's search ability. The proposed algorithm is compared with eight
-                            state-of-the-art optimizers on 34 test problems. The experimental results demonstrate that
+                            state-of-the-art optimizers on 34 test problems. The experimental results demonstrate
+                            that
                             the proposed method is competitive in handling irregular PFs.</td>
                     </tr>
                 </table>
             </div>
         </div>
+
+
+
+        <script>
+            // Get the modal
+            var modal = document.getElementById("myModal");
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("editButton");
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks the button, open the modal 
+            btn.onclick = function () {
+                modal.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+
+
+
+
+
+
         <div class="pane2">
             <h1>Pane2（論文内容）</h1>
         </div>
     </div>
 </body>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- モーダルのヘッダー -->
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Paper Details</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <form id="editPaperForm">
+                    <input type="hidden" name="paper_id" value="{{ paper.id }}">
+                    <div class="form-group row">
+                        <label for="paperTitle" class="col-sm-3 col-form-label">Title</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="paperTitle" name="title"
+                                value="{{paper.title }}" required>
+                        </div>
+                    </div>
+                    <div class=" form-group row">
+                        <label for="auther" class="col-sm-3 col-form-label">Auther</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="auther" name="auther"
+                                value="{{ author_names }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="source" class="col-sm-3 col-form-label">Source</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="source" name="source"
+                                value="{{ paper.source_reference }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="publication" class="col-sm-3 col-form-label">Publication Date</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="publication" name="publication"
+                                value="{{ paper.public_date }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="URL" class="col-sm-3 col-form-label">URL</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="URL" name="URL" value="{{ paper.url }}">
+                        </div>
+                    </div>
+                    <div class=" form-group row">
+                        <label for="description" class="col-sm-3 col-form-label">Description</label>
+                        <div class="col-sm-9">
+                            <textarea id="description" class="form-control" name="description" rows="4"
+                                cols="50"></textarea><br><br>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- モーダルのフッター -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">close</button>
+                <button type="submit" class="btn btn-primary" form="editPaperForm">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQueryとBootstrapのJavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- モーダル表示用のJavaScript -->
+<script>
+    $(document).ready(function () {
+        $("#editButton").click(function () {
+            $("#myModal").modal();
+        });
+    });
+</script>
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 
 </html>

@@ -1,0 +1,14 @@
+# ベースイメージとして公式のNode.jsイメージを使用
+FROM node:14
+
+# 作業ディレクトリを作成
+WORKDIR /usr/src/app
+
+# Azuriteのインストール
+RUN npm install -g azurite 
+
+RUN npm install @azure/storage-blob @azure/abort-controller
+
+# 初期化スクリプトを作成
+COPY init_azurite.js /usr/src/app/init.js
+
