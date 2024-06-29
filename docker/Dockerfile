@@ -29,7 +29,7 @@ poetry config virtualenvs.in-project true
 
 ENV SHELL=/bin/bash
 RUN apt update -y 
-RUN apt install vim net-tools sqlite3 build-essential graphviz default-jre fonts-ipafont -y
+RUN apt install vim net-tools sqlite3 build-essential graphviz default-jre fonts-ipafont poppler-utils -y 
 
 
-CMD ["bash"]
+CMD ["basssss"]

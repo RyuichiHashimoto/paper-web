@@ -44,6 +44,19 @@ services:
     - ../mysql_server/db/my.cnf:/etc/mysql/conf.d/my.cnf
     - ../mysql_server/db/sql:/docker-entrypoint-initdb.d
   
+  paper-client:
+    build: 
+     context: .
+     dockerfile: Dockerfile_react
+    container_name: paper-client
+    volumes:
+      - ../paper-client:/usr/src/app
+    command: sh -c "cd react-app && yarn start"
+    env_file: 
+      - "../env/API.env"
+    
+    # ports:
+    #   - "3000:3000"
 
   paper-azurite:
     build: 
