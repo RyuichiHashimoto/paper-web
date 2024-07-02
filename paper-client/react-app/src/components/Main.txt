@@ -1,0 +1,26 @@
+import React, { useState } from 'react';
+import { Tabs, Tab, Box, Typography, Drawer, AppBar, Toolbar, CssBaseline, List, ListItem, ListItemText } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from 'colortheme/theme'; // 作成したテーマをインポート
+import { CustomTab, CustomTabs } from '../colortheme/CustomTabs'; // CustomTabs のインポート
+import PaperTable from './paper/PaperTable';
+import LLMTable from './llm/LLMPromptTable'
+import CustomTabsComponent from './navitabs/NavTabs';
+import 'assets/styles/errorMessage.css';
+
+function App() {
+    const [value, setValue] = useState(0);
+
+    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
+    return (
+        <ThemeProvider theme={theme}>
+            <CustomTabsComponent value={value} handleChange={handleChange}></CustomTabsComponent>
+        </ThemeProvider >
+    );
+}
+
+
+
+export default App;
