@@ -6,12 +6,32 @@ entity paper {
   ---
   title : STR
   abstract: STR
-  description: STR <<NULL>>
   source_reference: STR <<NULL>>
   url: STR <<NULL>>
   public_date : DATE 
   created_at : DATE 
   last_modified : DATE
+}
+
+entity LLMPrompt {
+  * prompt_id : STR
+  ---
+  name: STR
+  prompt: STR
+}
+
+entity Paper_LLMSummary {
+  * paper_id : STR
+  * LLMPrompt: STR
+  ---
+  summary: STR
+}
+
+entity paper_metainfo {
+  * paper_id : STR
+  ---
+  visible: BOOL
+  cloudfilepath:  TEXT
 }
 
 
@@ -53,10 +73,14 @@ entity chapter {
 
 paper ||--o{ chapter
 paper ||--o{ paper_auther
+paper ||--|| paper_metainfo
 auther ||--o{ paper_auther
 
 paper ||--o{ paper_category
 category ||--o{ paper_category
+
+paper ||--{ Paper_LLMSummary
+LLMPrompt ||--{ Paper_LLMSummary
 
 ' techniques || 
 
