@@ -71,10 +71,10 @@ services:
       - ../azurite:/data
     command: "azurite --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0 -l /data"
 
-  paper-azurite-cli:
-    image: mcr.microsoft.com/azure-storage/azurite-cli     
-    container_name: paper-azurite-cli    
-    command: sleep 1000000000    
+      #  paper-azurite-cli:
+      #image: mcr.microsoft.com/azure-storage/azurite-cli     
+      #container_name: paper-azurite-cli    
+      #    command: sleep 1000000000    
 
 
 
