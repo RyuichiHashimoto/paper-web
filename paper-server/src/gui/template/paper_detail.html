@@ -57,69 +57,22 @@
 
                     <tr>
                         <th>Description</th>
-                        <td>The performance of decomposition-based multiobjective evolutionary algorithms (MOEAs)
-                            often
-                            deteriorates clearly when solving multiobjective optimization problems with irregular
-                            Pareto
-                            fronts (PFs). The main reason is the improper settings of reference vectors and
-                            scalarizing
-                            functions. In this paper, we propose a decomposition-based MOEA guided by a growing
-                            neural
-                            gas network, which learns the topological structure of the PF. Both reference vectors
-                            and
-                            scalarizing functions are adapted based on the topological structure to enhance the
-                            evolutionary algorithm's search ability. The proposed algorithm is compared with eight
-                            state-of-the-art optimizers on 34 test problems. The experimental results demonstrate
-                            that
-                            the proposed method is competitive in handling irregular PFs.</td>
+                        <td>{{ paper.abstract }} </td>
                     </tr>
                 </table>
             </div>
         </div>
 
-
-
-        <script>
-            // Get the modal
-            var modal = document.getElementById("myModal");
-
-            // Get the button that opens the modal
-            var btn = document.getElementById("editButton");
-
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
-
-            // When the user clicks the button, open the modal 
-            btn.onclick = function () {
-                modal.style.display = "block";
-            }
-
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function () {
-                modal.style.display = "none";
-            }
-
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-        </script>
-
-
-
-
-
-
         <div class="pane2">
-            <h1>Pane2（論文内容）</h1>
+            <h1>Paper Summary</h1>
+            {{ summary | safe}}
+
         </div>
     </div>
 </body>
 
 <!-- The Modal -->
-<div class="modal" id="myModal">
+<div class="modal" id="editModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <!-- モーダルのヘッダー -->
@@ -130,7 +83,7 @@
 
             <div class="modal-body">
                 <form id="editPaperForm">
-                    <input type="hidden" name="paper_id" value="{{ paper.id }}">
+                    <input type="hidden" name="paper_id" value="{{ paper.paper_id }}">
                     <div class="form-group row">
                         <label for="paperTitle" class="col-sm-3 col-form-label">Title</label>
                         <div class="col-sm-9">
@@ -166,10 +119,10 @@
                         </div>
                     </div>
                     <div class=" form-group row">
-                        <label for="description" class="col-sm-3 col-form-label">Description</label>
+                        <label for="abstract" class="col-sm-3 col-form-label">Abstract</label>
                         <div class="col-sm-9">
-                            <textarea id="description" class="form-control" name="description" rows="4"
-                                cols="50"></textarea><br><br>
+                            <textarea id="abstract" class="form-control" name="abstract" rows="4"
+                                cols="50">{{paper.abstract}}</textarea><br><br>
 
                         </div>
                     </div>
@@ -192,10 +145,10 @@
 <script>
     $(document).ready(function () {
         $("#editButton").click(function () {
-            $("#myModal").modal();
+            $("#editModal").modal();
         });
     });
 </script>
-<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+<script src="{{ url_for('static', filename='js/edit_modal.js') }}"></script>
 
 </html>

@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from enum import Enum
 from openai import OpenAI
 
 
@@ -28,7 +27,7 @@ class GPT3_5(model):
 class GPT4o(model):
     @property
     def name(self):
-        return "gpt-3.5-turbo"
+        return "gpt-4o"
 
     def __init__(self):
         self.model = self.name
